@@ -2,14 +2,10 @@ from java.lang import System
 from java.util import Vector
 
 import sys
-sys.path.append('/home/chad/jython2.7.0/Lib/') #use this to import Java module
-sys.path.append('/home/chad/jython2.7.0/Lib/dist-packages/') #use this to import Java module
+#sys.path.append('/home/chad/jython2.7.0/Lib/') #use this to import Java module
+#sys.path.append('/home/chad/jython2.7.0/Lib/dist-packages/') #use this to import Java module
 
-import numpy
-
-
-
-
+#import numpy
 
 from java.io import FileOutputStream
 
@@ -57,7 +53,12 @@ def testVector():
     for val in v:
         print val
  
-
+def parseInputs():
+    args = sys.argv[1:]
+    if len(args) != 1:
+        print 'usage: extend_fileoutputstream.py <infilename>'
+        sys.exit(1)
+    test(args[0])
 
 def main():
     
@@ -66,11 +67,7 @@ def main():
     #printsys()
     #printprops()
 
-    args = sys.argv[1:]
-    if len(args) != 1:
-        print 'usage: extend_fileoutputstream.py <infilename>'
-        sys.exit(1)
-    test(args[0])
+
 
 
 if __name__ == '__main__':
