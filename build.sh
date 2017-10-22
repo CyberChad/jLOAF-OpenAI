@@ -1,10 +1,3 @@
-THIS IS LINE # 0
-THIS IS LINE # 1
-THIS IS LINE # 2
-THIS IS LINE # 3
-THIS IS LINE # 4
-THIS IS LINE # 5
-THIS IS LINE # 6
-THIS IS LINE # 7
-THIS IS LINE # 8
-THIS IS LINE # 9
+#!/bin/bash 
+ 
+javac -g -verbose -classpath "/home/chad/github/JLOAF/bin" -sourcepath "/home/chad/github/jLOAF-OpenAI/src/" -d "/home/chad/github/jLOAF-OpenAI/bin" ./src/PerformanceTesting/PerformanceTest.java 
