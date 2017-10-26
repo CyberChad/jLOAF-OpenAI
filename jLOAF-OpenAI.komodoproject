@@ -2,12 +2,13 @@
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="22052d41-f7c8-424a-b0fc-46eacda3b0df" kpf_version="5" name="jLOAF-OpenAI.komodoproject">
 <preference-set idref="22052d41-f7c8-424a-b0fc-46eacda3b0df" id="project" preftype="project">
-  <boolean id="editShowMinimap">1</boolean>
+  <boolean id="editShowMinimap">0</boolean>
   <string relative="path" id="import_dirname"></string>
   <string id="jshint_linter_chooser">default</string>
   <string id="last_local_directory">None</string>
   <string id="last_remote_directory">None</string>
   <string id="lessDefaultInterpreter">None</string>
+  <long id="prefs_version">1</long>
   <string id="sassDefaultInterpreter">None</string>
   <string id="scssDefaultInterpreter">None</string>
 </preference-set>
