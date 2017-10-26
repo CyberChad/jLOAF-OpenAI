@@ -28,37 +28,44 @@ import org.jLOAF.weights.SimilarityWeights;
  * @author Chad Peters
  * @since 2017 September
  */
-public class OpenAIAgent extends Agent{
-
-
-	/*
-	 * constructor
-	 *
-	 * @param casebase the casebase with all the cases the agent has observed.
-	 */
-	public OpenAIAgent() {
+public class OpenAIAgent extends Agent
+{
+	// constructor
+	public OpenAIAgent()
+	{
 		super(null,null,null,null);
 
 		this.mc = new OpenAIMotorControl();
-
 		this.p = new OpenAIPerception();
 
 	}
 
-
-
+	 //@Override
+	 /*
+	  *Run the agent using provided inputs
+	 * @param input the inputs that the agent is observing
+	*/
 	@Override
-	public Action run(Input input) {
-		AtomicAction a = (AtomicAction) this.r.selectAction(input);
+	public Action run(Input input)
+	{
+		AtomicAction a = (AtomicAction) this.r.selectAction(input); //still using this??
+		this.r.selectAction(input);
+		
 		return (OpenAIAction) a;
 	}
 
 	//@Override
-	public void train(CaseBase casebase) {
+	 /*
+	  *Train the agent using the provided casebase
+	 * @param casebase the casebase with all the cases the agent has observed.
+	*/
+	public void train(CaseBase casebase)
+	{
 		this.cb = casebase;
 
-		if(this.r==null){
-		this.r = new TBReasoning(casebase);
+		if( this.r == null )
+		{
+			this.r = new TBReasoning(casebase);
 		}
 
 	}

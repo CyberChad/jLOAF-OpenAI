@@ -40,7 +40,7 @@ public class PerformanceTest extends PerformanceEvaluator {
 		}
 
 		*/
-		System.out.println("Hello World");
+		System.out.println("Hello World of Awesome");
 	}
 
 

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#java -cp "./bin" PerformanceTest.class
+java PerformanceTesting.PerformanceTest

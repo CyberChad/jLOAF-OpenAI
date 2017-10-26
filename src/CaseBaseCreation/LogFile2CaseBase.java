@@ -13,6 +13,8 @@ import org.jLOAF.inputs.AtomicInput;
 import org.jLOAF.inputs.ComplexInput;
 import org.jLOAF.inputs.Feature;
 import org.jLOAF.sim.SimilarityMetricStrategy;
+import org.jLOAF.sim.AtomicSimilarityMetricStrategy;
+import org.jLOAF.sim.ComplexSimilarityMetricStrategy;
 import org.jLOAF.sim.StateBasedSimilarity;
 import org.jLOAF.sim.StateBased.KOrderedSimilarity;
 import org.jLOAF.sim.StateBased.OrderedSimilarity;
@@ -32,12 +34,13 @@ import AgentModules.OpenAIInput;
  * @author Chad Peters
  * @since 2017 September
  */
-public class LogFile2CaseBase {
+public class LogFile2CaseBase
+{
 
-	protected SimilarityMetricStrategy atomicStrategy = new EuclideanDistance();
-	protected SimilarityMetricStrategy complexStrategy = new Mean();
-	protected SimilarityMetricStrategy vacumStrategy = new WeightedMean(new SimilarityWeights());
-	protected StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
+	protected static AtomicSimilarityMetricStrategy atomicStrategy = new EuclideanDistance();
+	protected static ComplexSimilarityMetricStrategy complexStrategy = new Mean();
+	//protected SimilarityMetricStrategy vacumStrategy = new WeightedMean(new SimilarityWeights());
+	protected static StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
 
 
 	/*
@@ -65,8 +68,8 @@ public class LogFile2CaseBase {
 			int index=0;
 			double[] entry=new double[9];
 
-			while(sc.hasNextLine()){
-
+			while(sc.hasNextLine())
+			{
 
 				try {
 
@@ -103,9 +106,9 @@ public class LogFile2CaseBase {
 	 */
 	public void createCase(CaseBase cb2, double[] entry)
 	{
-		/*
+		
 		OpenAIAction act= new OpenAIAction(Actions.values()[(int)entry[8]-1].getAction());
-		OpenAIInput vci = new OpenAIInput(OpenAIInput.NAME,vacumStrategy);
+		OpenAIInput vci = new OpenAIInput(OpenAIInput.NAME,complexStrategy);
 		for(int i=0;i<entry.length-1;i=i+4){
 			ComplexInput ci =Inputs.values()[i/4].setFeat(complexStrategy);
 			 AtomicInput a1 = new AtomicInput("up",new Feature(entry[i]-1),atomicStrategy);
@@ -117,12 +120,12 @@ public class LogFile2CaseBase {
 			 ci.add(a3);
 			 ci.add(a4);
 			 vci.add(ci);
-			//System.out.println(vci.getChildNames().size());
-			*/
-		//}
-		//Case c =new Case(vci,act);
+			 
+			//System.out.println(vci.getChildNames().size());			
+		}
+		Case c =new Case(vci,act);
 
-		//cb2.createThenAdd(vci,act,stateBasedStrategy);
+		cb2.createThenAdd(vci,act,stateBasedStrategy);
 
 
 

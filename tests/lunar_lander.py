@@ -1,7 +1,3 @@
-from java.lang import System
-System.out.println('hello, world')
-
-
 import sys, math
 import numpy as np
 
@@ -56,8 +52,9 @@ LEG_SPRING_TORQUE = 40
 SIDE_ENGINE_HEIGHT = 14.0
 SIDE_ENGINE_AWAY   = 12.0
 
-VIEWPORT_W = 600
-VIEWPORT_H = 400
+VIEWPORT_W = 900
+VIEWPORT_H = 600
+
 
 class ContactDetector(contactListener):
     def __init__(self, env):

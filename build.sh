@@ -1,3 +1,3 @@
 #!/bin/bash 
  
-javac -g -verbose -classpath "/home/chad/github/JLOAF/bin" -sourcepath "/home/chad/github/jLOAF-OpenAI/src/" -d "/home/chad/github/jLOAF-OpenAI/bin" ./src/PerformanceTesting/PerformanceTest.java 
+javac -g -classpath "../JLOAF/bin:/usr/local/share/py4j/py4j0.10.6.jar" -sourcepath "./src" -d "./bin" ./src/Experiment/GymSim.java
