@@ -36,6 +36,8 @@ import org.jLOAF.performance.PerformanceEvaluator;
 import org.jLOAF.preprocessing.filter.CaseBaseFilter;
 import org.jLOAF.preprocessing.filter.featureSelection.HillClimbingFeatureSelection;
 
+import org.jLOAF.reasoning.*;
+
 import org.jLOAF.action.AtomicAction;
 import org.jLOAF.sim.atomic.Equality;
 import org.jLOAF.sim.AtomicSimilarityMetricStrategy;
@@ -227,7 +229,7 @@ class JepGymTest
 		
 		//myAgent.train(new TBReasoning(myCaseBase));
 		
-		myAgent.train(new TBReasoning(dst_file));
+		myAgent.train(myCaseBase);
 	
 	}//main
 	
