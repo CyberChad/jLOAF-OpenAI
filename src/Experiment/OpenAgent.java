@@ -21,7 +21,8 @@ import org.jLOAF.sim.atomic.Equality;
 import org.jLOAF.sim.atomic.EuclideanDistance;
 import org.jLOAF.sim.atomic.PercentDifference;
 
-public class GymSim {
+public class JloafServer
+{
 	/**
 	 * Use a jLOAF Agent to play with Open Gym
 	 * @param args
