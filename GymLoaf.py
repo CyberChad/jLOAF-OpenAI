@@ -19,7 +19,8 @@ controls = []
 # Test yourself as a learning agent! Pass environment name as a command-line argument.
 #
 
-env = gym.make('LunarLander-v2' if len(sys.argv)<2 else sys.argv[1])
+#env = gym.make('LunarLander-v2' if len(sys.argv)<2 else sys.argv[1])
+env = gym.make('CartPole-v0' if len(sys.argv)<2 else sys.argv[1])
 
 #may need this if we have to call the jLOAF module directly
 sys.path.append("/home/chad/github/NMAI/jLOAF-OpenAI/bin")
