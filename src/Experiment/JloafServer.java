@@ -18,10 +18,13 @@ import org.jLOAF.inputs.ComplexInput;
 import org.jLOAF.inputs.Feature;
 import org.jLOAF.inputs.Input;
 import org.jLOAF.inputs.StateBasedInput;
+import org.jLOAF.preprocessing.filter.CaseBaseFilter;
+import org.jLOAF.preprocessing.filter.featureSelection.HillClimbingFeatureSelection;
 import org.jLOAF.reasoning.BayesianReasoner;
 import org.jLOAF.reasoning.KDReasoning;
 import org.jLOAF.reasoning.SimpleKNN;
 import org.jLOAF.reasoning.TBReasoning;
+import org.jLOAF.reasoning.WeightedKNN;
 import org.jLOAF.sim.SimilarityMetricStrategy;
 import org.jLOAF.sim.StateBasedSimilarity;
 import org.jLOAF.sim.AtomicSimilarityMetricStrategy;
@@ -29,6 +32,7 @@ import org.jLOAF.sim.atomic.EuclideanDistance;
 import org.jLOAF.sim.ComplexSimilarityMetricStrategy;
 import org.jLOAF.sim.atomic.PercentDifference;
 import org.jLOAF.sim.complex.Mean;
+import org.jLOAF.sim.StateBased.KOrderedSimilarity;
 import org.jLOAF.sim.StateBased.KUnorderedSimilarity;
 import org.jLOAF.sim.StateBased.OrderedSimilarity;
 
@@ -46,9 +50,9 @@ public class JloafServer
 	 * @param args
 	 */
 	
-	protected Agent myAgent;
+	protected static OpenAIAgent myAgent;
 	//protected String src_file = "subsample.cb";
-	protected CaseBase cb;
+	protected static CaseBase cb;
 	
 	protected static String log_file = "subsample.log";			
 	protected static String cb_file = "subsample.cb";
@@ -57,40 +61,110 @@ public class JloafServer
 	
 	public JloafServer() //default constructor
 	{
-		//do nothing for now		
-	}
-	
-	public void init()
-	{
 		//agent = new OpenAgent();
 		System.out.println("** Instantiating JloafServer **");
 		
+		cb = CaseBase.load(cb_file);
 		myAgent = new OpenAIAgent();
 		complexStrat = new Mean();
 		
 		System.out.println("** Training Agent **");
-		//k =3;
-		myAgent.train(new TBReasoning(cb));		
+		int k = 7;
+		myAgent.train(new WeightedKNN(k,cb));		
 	}
 	
-	public double nextAction(double[] obs)
+
+	public String nextAction(double[] obs)
 	{
 		System.out.println("** nextAction called from client **");
 		
 		int size = obs.length;
 		
-		for(int i=0; i < size; i++)
+		
+		if (DEBUG) System.out.println("..Creating Complex Input...");
+		
+		
+		OpenAIInput input = new OpenAIInput("observation",complexStrategy);
+		
+		StateBasedInput stateInput = new StateBasedInput("test",stateBasedStrategy);
+		
+
+		
+		//testCase.createThenAdd(input, a, sim);
+		//StateBasedInput input2 = new StateBasedInput()
+		
+		//AtomicAction action = new AtomicAction(""+entry[entry_len-1]);
+		
+		if (DEBUG) System.out.println("..Creating Atomic Action...");
+		AtomicAction action = null;
+				
+
+		//Feature[] features = new Feature[row_length-1];
+		//AtomicInput[] inputs = new AtomicInput[row_length-1];
+		
+		for( int i=0; i< obs.length; i++)
 		{
-			System.out.println("Index: "+i+" Feature: "+obs[i]);
+			System.out.println(obs[i]);
 		}
-		
-		//Input input = new ComplexInput("Observation", complexStrat);
-		
-		//Action act = myAgent.run(input);
-		
 			
-		//return act.getName(); //for now
-		return 0;
+		Feature f0 = new Feature(obs[0]);
+		Feature f1 = new Feature(obs[1]);
+		Feature f2 = new Feature(obs[2]);
+		Feature f3 = new Feature(obs[3]);
+						
+		//static size, need to loop through variable size feature space
+		
+		AtomicInput i0 = new AtomicInput("test",f0,atomicStrategy);
+		AtomicInput i1 = new AtomicInput("test",f1,atomicStrategy);
+		AtomicInput i2 = new AtomicInput("test",f2,atomicStrategy);
+		AtomicInput i3 = new AtomicInput("test",f3,atomicStrategy);
+		
+		//features[index] = new Feature(next_double);
+		
+		//bigint = new Integer(index);
+		
+		//inputs[index] = new AtomicInput("test"+bigint.toString(),features[index],atomicStrategy);
+		
+		if (DEBUG) System.out.println("..adding to complex Input...");
+		
+		
+		input.add(i0);
+		input.add(i1);	
+		input.add(i2);
+		input.add(i3);
+		
+		
+		stateInput.setInput(input);
+		
+		//action = new AtomicAction("move");
+		//action.setFeature(new Feature(next_double));
+		
+		//c0 = new Case(i0,action);
+		
+		if (DEBUG) System.out.println("..getting predicted action...");
+		
+		
+		OpenAIAction predicted = (OpenAIAction)myAgent.run(stateInput);
+		
+		String returnVal = null;
+		
+		returnVal = predicted.getName();
+		
+		if( returnVal != null )
+		{
+			System.out.println("return val: "+returnVal);
+		}
+		else
+		{
+			returnVal = "";
+		}
+				
+		//predicted = a.getR().selectAction(c0.getInput());						
+		
+		//System.out.println("Action Predicted: " + predicted.getName());
+		
+				
+		return returnVal;
 	}
 	
 	private static boolean DEBUG = true;	
@@ -99,7 +173,7 @@ public class JloafServer
 	protected static ComplexSimilarityMetricStrategy complexStrategy = new Mean();
 	//protected SimilarityMetricStrategy gymStrategy = new WeightedMean(new SimilarityWeights());
 	//protected StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
-	protected static StateBasedSimilarity stateBasedStrategy = new OrderedSimilarity();
+	protected static StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
 
 
 	/*
@@ -144,7 +218,8 @@ public class JloafServer
 		AtomicInput input3 = new AtomicInput("input3",f3,atomicStrategy);
 
 		if (DEBUG) System.out.println("..Creating Complex Input...");
-		ComplexInput input = new ComplexInput("observation",complexStrategy);
+		
+		OpenAIInput input = new OpenAIInput("observation",complexStrategy);
 		
 		input.add(input0);
 		input.add(input1);
@@ -155,10 +230,27 @@ public class JloafServer
 		
 		
 		if (DEBUG) System.out.println("..Creating Atomic Action...");
-		AtomicAction action = new AtomicAction("Move");
-		Feature f4 = new Feature(entry[4]);
 		
-		action.setFeature(f4);		
+		String move = "";
+		
+		
+		
+		if(entry[4]==1)
+		{
+			move = "RIGHT";
+		}
+		else
+		{
+			move = "LEFT";
+		}
+		
+		if (DEBUG) System.out.println("Action Observed: "+move);
+		
+		OpenAIAction action = new OpenAIAction(move);
+		
+		//Feature f4 = new Feature(entry[4]);
+		
+		//action.setFeature(f4);		
 		//entry[entry_len-1]);
 		
 		//System.out.println(vci.getChildNames().size());
@@ -239,7 +331,7 @@ public class JloafServer
 	{
 		System.out.println("-- Test Log to Case Base --");
 		//init test agent
-		GenericAgent testAgent = new GenericAgent();
+		OpenAIAgent testAgent = new OpenAIAgent();
 		
 		parseLogFile(log_file,cb_file);
 		
@@ -284,7 +376,7 @@ public class JloafServer
 		AtomicInput ai3 = new AtomicInput("3",f3,simStratEuc);
 		AtomicInput ai4 = new AtomicInput("4",f4,simStratEuc);
 		
-		ComplexInput ci1 = new ComplexInput("observation", stateBasedStrategy);
+		OpenAIInput ci1 = new OpenAIInput("observation", complexStrategy);
 		
 		ci1.add(ai1);
 		
@@ -303,13 +395,14 @@ public class JloafServer
 		File file = new File(log_file);
 		
 		CaseBase cb = CaseBase.load(cb_file);
+		CaseBaseFilter ft = new HillClimbingFeatureSelection(null);
 		
 		System.out.println("...Loading Agent...");
 		
 		//create generic agent
 		int k = 3;
-		Agent a = new GenericAgent();
-		a.setR(new SimpleKNN(k,cb));
+		OpenAIAgent testAgent = new OpenAIAgent();
+		testAgent.setR(new WeightedKNN(k,cb));
 		//a.setR(new KDReasoning(cb));
 				
 		int counter=0, index=0, row_length = 5;				
@@ -318,9 +411,19 @@ public class JloafServer
 		System.out.println("...reading from observations...");
 		
 		if (DEBUG) System.out.println("..Creating Complex Input...");
-		ComplexInput input = new ComplexInput("observation",stateBasedStrategy);
 		
-		StateBasedInput input2 = new StateBasedInput()
+		CaseBase testCase = new CaseBase();
+		
+		
+		
+		OpenAIInput input = new OpenAIInput("observation",complexStrategy);
+		
+		StateBasedInput stateInput = new StateBasedInput("test",stateBasedStrategy);
+		
+
+		
+		//testCase.createThenAdd(input, a, sim);
+		//StateBasedInput input2 = new StateBasedInput()
 		
 		//AtomicAction action = new AtomicAction(""+entry[entry_len-1]);
 		
@@ -335,7 +438,7 @@ public class JloafServer
 		AtomicInput i0 = null;
 		Case c0 = null;
 		
-		Action predicted = null;
+		OpenAIAction predicted = null;
 		Integer bigint = null;
 		
 		try
@@ -366,22 +469,34 @@ public class JloafServer
 						
 					if( index == row_length-1 )
 					{					
+						String actualAction = "";
+						if(next_double == 0)
+						{
+							actualAction = "LEFT";
+						}
+						else
+						{
+							actualAction = "RIGHT";
+						}
 						
-						if (DEBUG) System.out.println("Actual Action: "+next_double);
+						if (DEBUG) System.out.println("Actual Action: "+actualAction);
+						
+						stateInput.setInput(input);
 						
 						//action = new AtomicAction("move");
 						//action.setFeature(new Feature(next_double));
 						
 						//c0 = new Case(i0,action);
 						
-						predicted = a.run(input);
-						a.
+						predicted = (OpenAIAction)testAgent.run(stateInput);
 						
 						//predicted = a.getR().selectAction(c0.getInput());						
 						
 						System.out.println("Action Predicted: " + predicted.getName());
 						input = null;
-						input = new ComplexInput("observation",simS);
+						input = new OpenAIInput("observation",complexStrategy);
+						stateInput = null;
+						stateInput = new StateBasedInput("test",stateBasedStrategy);
 					}
 					
 					counter++;					
@@ -415,15 +530,15 @@ public class JloafServer
 	{
 		System.out.println("-- Initialize JLOAF Server --");
 		
-		GatewayServer server = new GatewayServer(new JloafServer());
-		//server.start();
-		//System.out.println("Py4J Gateway Server Started");
-		
 		//testLogToCaseBase();
 		//testLoadCaseBase();
 		
+		GatewayServer server = new GatewayServer(new JloafServer());
+		server.start();
+		System.out.println("Py4J Gateway Server Started");
+		
 		//testTrainAgent();		
-		testRunAgentFromFile();
+		//testRunAgentFromFile();
 		
 		
 	}//main

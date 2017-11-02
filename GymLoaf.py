@@ -80,15 +80,22 @@ while not done:
     
     tempaction = jLoaf.nextAction(double_array)
     
-    #print("Action from Server: "+tempaction)
+    print("Action from Server: "+tempaction)
     
     actions[0] = np.matmul(parameters[0],observation)
     actions[1] = np.matmul(parameters[1],observation)
     
-    next_action = np.argmax(actions) #replace with call to jLoafServer
+
+    #jLoaf.nextAction(observation)
+    #next_action = np.argmax(actions) #replace with call to jLoafServer
+    
+    if (tempaction == "RIGHT"):
+        next_action = 1
+    else:
+        next_action = 0
+        
+    
     
     env.render()
     import time
     time.sleep(0.05)
-
-    #jLoaf.nextAction(obs)

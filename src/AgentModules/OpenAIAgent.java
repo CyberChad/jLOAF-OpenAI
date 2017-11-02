@@ -48,7 +48,7 @@ public class OpenAIAgent extends Agent
 	@Override
 	public Action run(Input input)
 	{
-		return (AtomicAction) this.r.selectAction(input); //still using this??
+		return (OpenAIAction) this.r.selectAction(input); 
 	}
 
 	//@Override

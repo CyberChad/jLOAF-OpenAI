@@ -24,7 +24,8 @@ public class OpenAIInput extends ComplexInput {
 	 * @param name the name associated with the input
 	 *
 	 */
-	public OpenAIInput(String name,ComplexSimilarityMetricStrategy sim) {
+	public OpenAIInput(String name,ComplexSimilarityMetricStrategy sim) 
+	{
 		super(name,sim);
 
 	}
