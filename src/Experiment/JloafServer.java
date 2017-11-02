@@ -69,7 +69,7 @@ public class JloafServer
 		complexStrat = new Mean();
 		
 		System.out.println("** Training Agent **");
-		int k = 7;
+		int k = 5;
 		myAgent.train(new WeightedKNN(k,cb));		
 	}
 	
@@ -231,9 +231,7 @@ public class JloafServer
 		
 		if (DEBUG) System.out.println("..Creating Atomic Action...");
 		
-		String move = "";
-		
-		
+		String move = "";		
 		
 		if(entry[4]==1)
 		{
@@ -379,8 +377,7 @@ public class JloafServer
 		OpenAIInput ci1 = new OpenAIInput("observation", complexStrategy);
 		
 		ci1.add(ai1);
-		
-				
+						
 		AtomicAction a1 = new AtomicAction("left");
 		a1.setFeature(f5);
 		AtomicAction a2 = new AtomicAction("right");

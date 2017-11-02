@@ -67,12 +67,8 @@ while not done:
     
     observation, reward, done, info = env.step(next_action)
     
-    
-    
     print("Sending observation to server")
-    
-
-        
+            
     double_array[0] = observation[0]
     double_array[1] = observation[1]    
     double_array[2] = observation[2]    
@@ -87,15 +83,14 @@ while not done:
     
 
     #jLoaf.nextAction(observation)
-    #next_action = np.argmax(actions) #replace with call to jLoafServer
     
     if (tempaction == "RIGHT"):
         next_action = 1
     else:
         next_action = 0
         
-    
-    
+    #next_action = np.argmax(actions) #replace with call to jLoafServer
+        
     env.render()
     import time
     time.sleep(0.05)
