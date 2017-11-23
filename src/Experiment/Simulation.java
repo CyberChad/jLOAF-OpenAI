@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.jLOAF.Agent;
 import org.jLOAF.action.Action;
+import org.jLOAF.action.AtomicAction;
 import org.jLOAF.agents.GenericAgent;
 import org.jLOAF.casebase.Case;
 import org.jLOAF.casebase.CaseBase;
@@ -40,11 +41,11 @@ public class Simulation {
 		Input i4 = new AtomicInput("4", f4,sim);
 		Input i5 = new AtomicInput("5", f5,sim);
 			
-		Action a1 = new Action("down");
-		Action a2 = new Action("down");
-		Action a3 = new Action("up");
-		Action a4 = new Action("up");
-		Action a5 = new Action("up");
+		AtomicAction a1 = new AtomicAction("down");
+		AtomicAction a2 = new AtomicAction("down");
+		AtomicAction a3 = new AtomicAction("up");
+		AtomicAction a4 = new AtomicAction("up");
+		AtomicAction a5 = new AtomicAction("up");
 	
 		
 		Case c1 = new Case(i1, a1);
@@ -67,7 +68,7 @@ public class Simulation {
 		
 		//testcase
 		Input i6 = new AtomicInput("test", new Feature(1.5),sim);
-		Action a6 = new Action("down");
+		AtomicAction a6 = new AtomicAction("down");
 		Case c6 = new Case(i6,a6);
 		
 		//create generic agent

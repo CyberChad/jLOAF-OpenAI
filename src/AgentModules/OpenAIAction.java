@@ -14,6 +14,8 @@ public class OpenAIAction extends AtomicAction
 	{
 		LEFT("LEFT"),RIGHT("RIGHT");
 		
+		//TODO: abstract this to Gym environment, matched to MotorControl.
+		
 		private String action;
 		
 		Actions(String a)

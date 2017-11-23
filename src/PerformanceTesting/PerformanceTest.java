@@ -25,46 +25,56 @@ public class PerformanceTest extends PerformanceEvaluator {
 
 	public static void main(String[] args)
 	{
-	/*
-
-		String [] filenames = {"trace-m0-WallFollowerAgent.txt","trace-m1-WallFollowerAgent.txt"};
+		System.out.println("Starting Performance Evaluation");
+	
+		String [] filenames = 
+			{"subsample.log",
+			"subsample2.log"};
+		
+		//String [] outputFilenames = createArrayOfCasebaseNames(filenames);
+		String output_filename = "Results/SomeGymStuff,TB,standardize,none,none,none,.csv";
+		
 
 		PerformanceTest pt = new PerformanceTest();
 		CaseBaseFilter ft = new HillClimbingFeatureSelection(null);
-		try {
 
-			pt.PerformanceEvaluatorMethod(filenames,ft,"vcOutput.txt",null,null,null);
-
-		} catch (IOException e) {
+		//set the performance evaluator. Not passing in reasoner, or similaritymetricstrategy (yet)
+		try 
+		{
+			pt.PerformanceEvaluatorMethod(filenames,null,"gymOutput.txt","TB",null,null);
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
-
-		*/
-		System.out.println("Hello World of Awesome");
 	}
 
 
 	@Override
-	public OpenAIAgent createAgent() {
+	public OpenAIAgent createAgent() 
+	{
 		OpenAIAgent agent = new OpenAIAgent();
 
 		return agent;
 	}
 
 	@Override
-	public String[] createArrayOfCasebaseNames(String[] filenames) throws IOException {
-		//LogFile2CaseBase lfcb = new LogFile2CaseBase();
+	public String[] createArrayOfCasebaseNames(String[] filenames) throws IOException 
+	{
+		LogFile2CaseBase lfcb = new LogFile2CaseBase();
 		String[] outputs = new String[filenames.length];
 
-		//String outputFile ="vcb";
-		//int i=0;
+		String outputFile ="subsample";
 
-		//for(String s:filenames){
-		//	outputs[i]=lfcb.parseLogFile(s,outputFile+i+".cb");
-		//			i++;
-		//}
+		int i=0;
+		
+		for(String s:filenames)
+		{
+			outputs[i]=lfcb.parseLogFile(s,outputFile+i+".cb");
+			i++;
+		}
 
-			return outputs;
+		return outputs;
 	}
 
 

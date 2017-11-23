@@ -43,6 +43,7 @@ import AgentModules.OpenAIAction.Actions;
 import py4j.GatewayServer;
 
 
+@SuppressWarnings("unused")
 public class JloafServer
 {
 	/**

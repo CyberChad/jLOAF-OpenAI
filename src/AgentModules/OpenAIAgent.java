@@ -47,8 +47,8 @@ public class OpenAIAgent extends Agent
 	*/
 	@Override
 	public Action run(Input input)
-	{
-		return (OpenAIAction) this.r.selectAction(input); 
+	{		
+		return (AtomicAction) this.r.selectAction(input);
 	}
 
 	//@Override
@@ -62,7 +62,7 @@ public class OpenAIAgent extends Agent
 
 		if( this.r == null )
 		{
-			this.r = new TBReasoning(casebase);
+			this.r = new TBReasoning(casebase); //default to TB?
 		}
 
 	}
