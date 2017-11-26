@@ -1,4 +1,7 @@
-package Experiment;
+package Environment;
+
+import py4j.ClientServer;
+import py4j.GatewayServer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,7 +47,7 @@ import py4j.GatewayServer;
 
 
 @SuppressWarnings("unused")
-public class JloafServer
+public class JloafClient
 {
 	/**
 	 * Use a jLOAF Agent to play with Open Gym
@@ -60,7 +63,7 @@ public class JloafServer
 	
 	ComplexSimilarityMetricStrategy complexStrat;
 	
-	public JloafServer() //default constructor
+	public JloafClient() //default constructor
 	{
 		//agent = new OpenAgent();
 		System.out.println("** Instantiating JloafServer **");
@@ -523,17 +526,46 @@ public class JloafServer
 	
 	
 	}//testRunAgent
+
+	public interface GymEnv
+	{
+		public String testCommand(int i, String s);
+		public String getInfo();
+		
+		public void makeEnv(String env);
+		public void resetEnv();	
+		
+	    public double[] getActions();
+	    public double[] getObservations();
+		public double[] doAction(int action);	    
+	}
+
+
+
 	
 	public static void main(String [] args)
 	{
-		System.out.println("-- Initialize JLOAF Server --");
+		System.out.println("-- Initialize jLOAF Client --");
 		
+	    ClientServer clientServer = new ClientServer(null);
+        
+        // We get an entry point from the Python side
+        GymEnv my_env = (GymEnv) clientServer.getPythonServerEntryPoint(new Class[] { GymEnv.class });
+    
+        // Java calls Python without ever having been called from Python        
+        System.out.println(my_env.testCommand(2, "Hello World"));
+        clientServer.shutdown();
+	
 		//testLogToCaseBase();
 		//testLoadCaseBase();
-		
-		GatewayServer server = new GatewayServer(new JloafServer());
+        
+		/* Old Client-Server Code
+        
+		GatewayServer server = new GatewayServer(new JloafClient());
 		server.start();
 		System.out.println("Py4J Gateway Server Started");
+		
+		*/
 		
 		//testTrainAgent();		
 		//testRunAgentFromFile();
