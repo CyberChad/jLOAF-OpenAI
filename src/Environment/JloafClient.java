@@ -58,10 +58,22 @@ public class JloafClient
 	//protected String src_file = "subsample.cb";
 	protected static CaseBase cb;
 	
-	protected static String log_file = "subsample.log";			
-	protected static String cb_file = "subsample.cb";
+	
+	/* LogFile2CaseBase vars */
+	protected static String log_file = "tests/lander5000.log";			
+	protected static String cb_file = "tests/lander5000.cb";	
+	protected static int features = 0;
 	
 	ComplexSimilarityMetricStrategy complexStrat;
+	
+	
+	protected static AtomicSimilarityMetricStrategy atomicStrategy = new EuclideanDistance();
+	protected static ComplexSimilarityMetricStrategy complexStrategy = new Mean();
+	//protected SimilarityMetricStrategy gymStrategy = new WeightedMean(new SimilarityWeights());
+	//protected StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
+	protected static StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
+
+	private static boolean DEBUG = true;	
 	
 	public JloafClient() //default constructor
 	{
@@ -171,13 +183,6 @@ public class JloafClient
 		return returnVal;
 	}
 	
-	private static boolean DEBUG = true;	
-	
-	protected static AtomicSimilarityMetricStrategy atomicStrategy = new EuclideanDistance();
-	protected static ComplexSimilarityMetricStrategy complexStrategy = new Mean();
-	//protected SimilarityMetricStrategy gymStrategy = new WeightedMean(new SimilarityWeights());
-	//protected StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
-	protected static StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
 
 
 	/*
@@ -201,6 +206,7 @@ public class JloafClient
 		if (DEBUG) System.out.println("*** creating Case ***");
 		
 		int entry_len = entry.length;
+		int num_feats = entry_len-1;
 		
 		if (DEBUG) System.out.println("Entry Length: "+entry_len);
 		
@@ -208,18 +214,41 @@ public class JloafClient
 		//OpenAIInput input = new OpenAIInput(OpenAIInput.NAME,complexStrategy);
 		
 		if (DEBUG) System.out.println("..Creating Features...");
-		//static size, need to loop through variable size feature space
+
+		//static size, need to loop through variable size feature space		
+		/*
+		
+		Feature[] features = new Feature[entry_len];		
+		for( int i=0; i < num_feats; i++)
+		{
+			features[i] = new Feature(entry[i]);
+		}
+
+		*/
+		
 		Feature f0 = new Feature(entry[0]);
 		Feature f1 = new Feature(entry[1]);
 		Feature f2 = new Feature(entry[2]);
 		Feature f3 = new Feature(entry[3]);
+		Feature f4 = new Feature(entry[4]);
+		Feature f5 = new Feature(entry[5]);
+		Feature f6 = new Feature(entry[6]);
+		Feature f7 = new Feature(entry[7]);
+		
+		
 		
 		if (DEBUG) System.out.println("..Creating Atomic Inputs...");
+		
+		//AtomicInput[] inputs = new AtomicInputs[]
 		
 		AtomicInput input0 = new AtomicInput("input0",f0,atomicStrategy);
 		AtomicInput input1 = new AtomicInput("input1",f1,atomicStrategy);
 		AtomicInput input2 = new AtomicInput("input2",f2,atomicStrategy);
 		AtomicInput input3 = new AtomicInput("input3",f3,atomicStrategy);
+		AtomicInput input4 = new AtomicInput("input3",f4,atomicStrategy);
+		AtomicInput input5 = new AtomicInput("input3",f5,atomicStrategy);
+		AtomicInput input6 = new AtomicInput("input3",f6,atomicStrategy);
+		AtomicInput input7 = new AtomicInput("input3",f7,atomicStrategy);
 
 		if (DEBUG) System.out.println("..Creating Complex Input...");
 		
@@ -229,15 +258,23 @@ public class JloafClient
 		input.add(input1);
 		input.add(input2);
 		input.add(input3);
+		input.add(input4);
+		input.add(input5);
+		input.add(input6);
+		input.add(input7);
 		
 		//AtomicAction action = new AtomicAction(""+entry[entry_len-1]);
 		
 		
 		if (DEBUG) System.out.println("..Creating Atomic Action...");
 		
-		String move = "";		
+		String move = "";
+		//double action = entry[8];
 		
-		if(entry[4]==1)
+		move = Double.toString(entry[8]);
+		
+		/*
+		if(entry[8]==1)
 		{
 			move = "RIGHT";
 		}
@@ -245,6 +282,9 @@ public class JloafClient
 		{
 			move = "LEFT";
 		}
+		
+		*/
+		
 		
 		if (DEBUG) System.out.println("Action Observed: "+move);
 		
@@ -268,40 +308,58 @@ public class JloafClient
 	 * @param file a file to be parsed to a casebase
 	 * @return a casebase created from the logfile.
 	 */
-	private static String parseLogFile(String file1,String file2)
+	private static String parseLogFile(String file1, String file2)
 	{
 		File file= new File(file1);
 		CaseBase cb = new CaseBase();
 		
 		System.out.println("***parsing log file***");
 
-		int counter=0, index=0, row_length = 5;
-		double[] entry = new double[row_length];		
+		int counter=0;
 		double next_double=0;
 		
+		String line = null;
+		
+		String[] entries_s = null;
+		double[] entries_d = null; 
 		
 		try
 		{
 			Scanner sc = new Scanner(file);
-
+			
+			//get first line
+			if (sc.hasNextLine())
+			{
+				line = sc.nextLine(); 
+			}
+			
+			//initialize entry array
+			entries_s = line.split("\\s");
+			int row_length = entries_s.length;			
+			entries_d = new double[row_length];			
+			sc.reset(); //back to beginning
+			
+			System.out.println("Row length: "+row_length);
+			
+			
 			while(sc.hasNextLine())
 			{
+				line = sc.nextLine();				
 				
 				try
 				{
-					index = counter % row_length;
-					next_double = sc.nextDouble();
-										
-					if (DEBUG) System.out.println("Index: "+index+" Value: "+next_double);
-	
-					entry[index] = next_double;
-	
-					if( index == row_length-1 )
-					{						
-						createCase( cb, entry);
-						if (DEBUG) System.out.println("Line: "+counter+" ");
+					entries_s = line.split("\\s");								
+					entries_d = new double[row_length];
+					
+					for( int index=0; index < row_length; index++)
+					{
+						next_double = sc.nextDouble();
+						if (DEBUG) System.out.println("Index: "+index+" Value: "+next_double);
+						entries_d[index] = next_double;
 					}
 					
+					createCase( cb, entries_d);
+					if (DEBUG) System.out.println("Line: "+counter+" ");
 					counter++;					
 				}
 				catch (NoSuchElementException e)
@@ -310,6 +368,7 @@ public class JloafClient
 				}
 
 			}//while
+			
 			sc.close();
 			
 		}//try
@@ -320,6 +379,7 @@ public class JloafClient
 		}
 		
 		saveCaseBase(cb, file2);
+		
 		System.out.println("done with creating one caseBase");
 		return file2;
 	
@@ -547,26 +607,19 @@ public class JloafClient
 	{
 		System.out.println("-- Initialize jLOAF Client --");
 		
-	    ClientServer clientServer = new ClientServer(null);
         
         // We get an entry point from the Python side
-        GymEnv my_env = (GymEnv) clientServer.getPythonServerEntryPoint(new Class[] { GymEnv.class });
-    
-        // Java calls Python without ever having been called from Python        
+        // Java calls Python without ever having been called from Python
+	    
+	    /*
+	    ClientServer clientServer = new ClientServer(null);
+	    GymEnv my_env = (GymEnv) clientServer.getPythonServerEntryPoint(new Class[] { GymEnv.class });
         System.out.println(my_env.testCommand(2, "Hello World"));
         clientServer.shutdown();
+	     */
 	
 		//testLogToCaseBase();
-		//testLoadCaseBase();
-        
-		/* Old Client-Server Code
-        
-		GatewayServer server = new GatewayServer(new JloafClient());
-		server.start();
-		System.out.println("Py4J Gateway Server Started");
-		
-		*/
-		
+		testLoadCaseBase();
 		//testTrainAgent();		
 		//testRunAgentFromFile();
 		
