@@ -461,12 +461,16 @@ public class JloafClient
 		System.out.println("...Loading Agent...");
 		
 		//create generic agent
-		int k = 3;
+		int k = 2;
+		
+		int total = 0;
+		int right = 0;
 		OpenAIAgent testAgent = new OpenAIAgent();
-		testAgent.setR(new WeightedKNN(k,cb));
-		//a.setR(new KDReasoning(cb));
+		testAgent.setR(new SimpleKNN(k,cb));
+		//testAgent.setR(new WeightedKNN(k,cb));
+		//testAgent.setR(new KDReasoning(cb));
 				
-		int counter=0, index=0, row_length = 5;				
+		int counter=0, index=0, row_length = 9;				
 		double next_double=0;		
 		
 		System.out.println("...reading from observations...");
@@ -530,7 +534,8 @@ public class JloafClient
 						
 					if( index == row_length-1 )
 					{					
-						String actualAction = "";
+						//String actualAction = "";
+						/*
 						if(next_double == 0)
 						{
 							actualAction = "LEFT";
@@ -540,7 +545,8 @@ public class JloafClient
 							actualAction = "RIGHT";
 						}
 						
-						if (DEBUG) System.out.println("Actual Action: "+actualAction);
+						*/
+						if (DEBUG) System.out.println("Actual Action: "+next_double);
 						
 						stateInput.setInput(input);
 						
@@ -553,6 +559,14 @@ public class JloafClient
 						
 						//predicted = a.getR().selectAction(c0.getInput());						
 						
+										
+						String next = Double.toString(next_double); 
+						
+						if ( next.equals(predicted.getName()) )
+						{
+							right++;
+						}
+						total++;
 						System.out.println("Action Predicted: " + predicted.getName());
 						input = null;
 						input = new OpenAIInput("observation",complexStrategy);
@@ -582,7 +596,9 @@ public class JloafClient
 		
 		//Action predicted = a.getR().selectAction(c6.getInput());
 		
-		//System.out.println("Action Predicted: " + predicted.getName() +", and the correct action is " + a6.getName() + ".");
+		System.out.println("Actions Correct: " + right +" out of " + total);
+		
+		
 	
 	
 	}//testRunAgent
@@ -619,9 +635,9 @@ public class JloafClient
 	     */
 	
 		//testLogToCaseBase();
-		testLoadCaseBase();
+		//testLoadCaseBase();
 		//testTrainAgent();		
-		//testRunAgentFromFile();
+		testRunAgentFromFile();
 		
 		
 	}//main
