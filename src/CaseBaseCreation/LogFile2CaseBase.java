@@ -43,7 +43,7 @@ public class LogFile2CaseBase
 	protected static StateBasedSimilarity stateBasedStrategy = new KOrderedSimilarity(1);
 
 
-	private static boolean DEBUG = true;
+	private static boolean DEBUG = false;
 	
 	/*
 	 * outputs the casebase passed to it in a .cb file with the name also passed to it
@@ -68,33 +68,51 @@ public class LogFile2CaseBase
 		
 		System.out.println("***parsing log file***");
 
-		int counter=0, index=0, row_length = 5;
-		double[] entry = new double[row_length];		
+		int counter=0;
 		double next_double=0;
 		
+		String line = null;
+		
+		String[] entries_s = null;
+		double[] entries_d = null; 
 		
 		try
 		{
 			Scanner sc = new Scanner(file);
-
+			
+			//get first line
+			if (sc.hasNextLine())
+			{
+				line = sc.nextLine(); 
+			}
+			
+			//initialize entry array
+			entries_s = line.split("\\s");
+			int row_length = entries_s.length;			
+			entries_d = new double[row_length];			
+			sc.reset(); //back to beginning
+			
+			System.out.println("Row length: "+row_length);
+			
+			
 			while(sc.hasNextLine())
 			{
+				line = sc.nextLine();				
 				
 				try
 				{
-					index = counter % row_length;
-					next_double = sc.nextDouble();
-										
-					if (DEBUG) System.out.println("Index: "+index+" Value: "+next_double);
-	
-					entry[index] = next_double;
-	
-					if( index == row_length-1 )
-					{						
-						createCase( cb, entry);
-						if (DEBUG) System.out.println("Line: "+counter+" ");
+					entries_s = line.split("\\s");								
+					entries_d = new double[row_length];
+					
+					for( int index=0; index < row_length; index++)
+					{
+						next_double = sc.nextDouble();
+						if (DEBUG) System.out.println("Index: "+index+" Value: "+next_double);
+						entries_d[index] = next_double;
 					}
 					
+					createCase( cb, entries_d);
+					if (DEBUG) System.out.println("Line: "+counter+" ");
 					counter++;					
 				}
 				catch (NoSuchElementException e)
@@ -103,6 +121,7 @@ public class LogFile2CaseBase
 				}
 
 			}//while
+			
 			sc.close();
 			
 		}//try
@@ -113,6 +132,7 @@ public class LogFile2CaseBase
 		}
 		
 		saveCaseBase(cb, file2);
+		
 		System.out.println("done with creating one caseBase");
 		return file2;
 	
@@ -128,6 +148,7 @@ public class LogFile2CaseBase
 		if (DEBUG) System.out.println("*** creating Case ***");
 		
 		int entry_len = entry.length;
+		int num_feats = entry_len-1;
 		
 		if (DEBUG) System.out.println("Entry Length: "+entry_len);
 		
@@ -135,59 +156,34 @@ public class LogFile2CaseBase
 		//OpenAIInput input = new OpenAIInput(OpenAIInput.NAME,complexStrategy);
 		
 		if (DEBUG) System.out.println("..Creating Features...");
-		//static size, need to loop through variable size feature space
-		Feature f0 = new Feature(entry[0]);
-		Feature f1 = new Feature(entry[1]);
-		Feature f2 = new Feature(entry[2]);
-		Feature f3 = new Feature(entry[3]);
-		
-		if (DEBUG) System.out.println("..Creating Atomic Inputs...");
-		
-		AtomicInput input0 = new AtomicInput("input0",f0,atomicStrategy);
-		AtomicInput input1 = new AtomicInput("input1",f1,atomicStrategy);
-		AtomicInput input2 = new AtomicInput("input2",f2,atomicStrategy);
-		AtomicInput input3 = new AtomicInput("input3",f3,atomicStrategy);
 
-		if (DEBUG) System.out.println("..Creating Complex Input...");
-		
+		//loop through variable size feature space		
+				
+		Feature[] features = new Feature[entry_len];		
+		AtomicInput[] inputs = new AtomicInput[entry_len];		
 		OpenAIInput input = new OpenAIInput("observation",complexStrategy);
 		
-		input.add(input0);
-		input.add(input1);
-		input.add(input2);
-		input.add(input3);
+		if (DEBUG) System.out.println("..Creating Inputs...");
 		
-		//AtomicAction action = new AtomicAction(""+entry[entry_len-1]);
-		
-		
-		if (DEBUG) System.out.println("..Creating Atomic Action...");
-		
-		String move = "";		
-		
-		if(entry[4]==1)
+		for( int i=0; i < num_feats; i++)
 		{
-			move = "RIGHT";
+			features[i] = new Feature(entry[i]);
+			inputs[i] = new AtomicInput("input"+i,features[i],atomicStrategy);
+			input.add(inputs[i]);
 		}
-		else
-		{
-			move = "LEFT";
-		}
+		
+		String move = "";
+		
+		move = Double.toString(entry[entry_len-1]);
 		
 		if (DEBUG) System.out.println("Action Observed: "+move);
 		
 		OpenAIAction action = new OpenAIAction(move);
 		
-		//Feature f4 = new Feature(entry[4]);
-		
-		//action.setFeature(f4);		
-		//entry[entry_len-1]);
-		
 		//System.out.println(vci.getChildNames().size());
-		
 		//Case thisCase = new Case(input,action);
 		
 		cb2.createThenAdd(input,action,stateBasedStrategy);
-
 	}//createCase
 
 }

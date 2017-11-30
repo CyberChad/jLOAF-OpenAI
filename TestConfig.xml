@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<simulation>
+	<reasoner id="1">
+		<name>ONEKNN</name>
+	</reasoner>
+	<reasoner id="2">
+		<name>KNN</name>		
+	</reasoner>
+	<reasoner id="3">
+		<name>weightedKNN</name>
+	</reasoner>		
+	<log id="1">
+		<name>lander1.log</name>
+	</log>
+	<log id="2">
+		<name>lander2.log</name>
+	</log>
+	<log id="3">
+		<name>lander3.log</name>
+	</log>
+	<log id="4">
+		<name>lander4.log</name>
+	</log>
+	<log id="5">
+		<name>lander5.log</name>
+	</log>	
+</simulation>

@@ -25,7 +25,6 @@ controls = []
 #may need this if we have to call the jLOAF module directly
 sys.path.append("/home/chad/github/NMAI/jLOAF-OpenAI/bin")
 
-
 class GymEnv(object):
 
     def testCommand(self, int_value=None, string_value=None):

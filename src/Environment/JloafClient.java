@@ -78,15 +78,20 @@ public class JloafClient
 	public JloafClient() //default constructor
 	{
 		//agent = new OpenAgent();
-		System.out.println("** Instantiating JloafServer **");
+		System.out.println("** Instantiating JloafClient **");
 		
 		cb = CaseBase.load(cb_file);
 		myAgent = new OpenAIAgent();
-		complexStrat = new Mean();
 		
+		//complexStrat = new Mean();
+		
+		//---- Move this to a new train function ----
+		
+		/* 
 		System.out.println("** Training Agent **");
 		int k = 5;
-		myAgent.train(new WeightedKNN(k,cb));		
+		myAgent.train(new WeightedKNN(k,cb));
+		*/		
 	}
 	
 
@@ -215,88 +220,30 @@ public class JloafClient
 		
 		if (DEBUG) System.out.println("..Creating Features...");
 
-		//static size, need to loop through variable size feature space		
-		/*
-		
+		//loop through variable size feature space		
+				
 		Feature[] features = new Feature[entry_len];		
+		AtomicInput[] inputs = new AtomicInput[entry_len];		
+		OpenAIInput input = new OpenAIInput("observation",complexStrategy);
+		
+		if (DEBUG) System.out.println("..Creating Inputs...");
+		
 		for( int i=0; i < num_feats; i++)
 		{
 			features[i] = new Feature(entry[i]);
+			inputs[i] = new AtomicInput("input"+i,features[i],atomicStrategy);
+			input.add(inputs[i]);
 		}
-
-		*/
-		
-		Feature f0 = new Feature(entry[0]);
-		Feature f1 = new Feature(entry[1]);
-		Feature f2 = new Feature(entry[2]);
-		Feature f3 = new Feature(entry[3]);
-		Feature f4 = new Feature(entry[4]);
-		Feature f5 = new Feature(entry[5]);
-		Feature f6 = new Feature(entry[6]);
-		Feature f7 = new Feature(entry[7]);
-		
-		
-		
-		if (DEBUG) System.out.println("..Creating Atomic Inputs...");
-		
-		//AtomicInput[] inputs = new AtomicInputs[]
-		
-		AtomicInput input0 = new AtomicInput("input0",f0,atomicStrategy);
-		AtomicInput input1 = new AtomicInput("input1",f1,atomicStrategy);
-		AtomicInput input2 = new AtomicInput("input2",f2,atomicStrategy);
-		AtomicInput input3 = new AtomicInput("input3",f3,atomicStrategy);
-		AtomicInput input4 = new AtomicInput("input3",f4,atomicStrategy);
-		AtomicInput input5 = new AtomicInput("input3",f5,atomicStrategy);
-		AtomicInput input6 = new AtomicInput("input3",f6,atomicStrategy);
-		AtomicInput input7 = new AtomicInput("input3",f7,atomicStrategy);
-
-		if (DEBUG) System.out.println("..Creating Complex Input...");
-		
-		OpenAIInput input = new OpenAIInput("observation",complexStrategy);
-		
-		input.add(input0);
-		input.add(input1);
-		input.add(input2);
-		input.add(input3);
-		input.add(input4);
-		input.add(input5);
-		input.add(input6);
-		input.add(input7);
-		
-		//AtomicAction action = new AtomicAction(""+entry[entry_len-1]);
-		
-		
-		if (DEBUG) System.out.println("..Creating Atomic Action...");
 		
 		String move = "";
-		//double action = entry[8];
 		
-		move = Double.toString(entry[8]);
-		
-		/*
-		if(entry[8]==1)
-		{
-			move = "RIGHT";
-		}
-		else
-		{
-			move = "LEFT";
-		}
-		
-		*/
-		
+		move = Double.toString(entry[entry_len-1]);
 		
 		if (DEBUG) System.out.println("Action Observed: "+move);
 		
 		OpenAIAction action = new OpenAIAction(move);
 		
-		//Feature f4 = new Feature(entry[4]);
-		
-		//action.setFeature(f4);		
-		//entry[entry_len-1]);
-		
 		//System.out.println(vci.getChildNames().size());
-		
 		//Case thisCase = new Case(input,action);
 		
 		cb2.createThenAdd(input,action,stateBasedStrategy);
@@ -605,19 +552,21 @@ public class JloafClient
 
 	public interface GymEnv
 	{
+		// --- Debug ---
 		public String testCommand(int i, String s);
 		public String getInfo();
 		
+		// --- Init ---
 		public void makeEnv(String env);
 		public void resetEnv();	
 		
+		//--- MOVE TO PERCEPTION ---
 	    public double[] getActions();
 	    public double[] getObservations();
+	    
+	    //--- MOVE TO MOTORCONTROL ---
 		public double[] doAction(int action);	    
 	}
-
-
-
 	
 	public static void main(String [] args)
 	{
@@ -634,10 +583,10 @@ public class JloafClient
         clientServer.shutdown();
 	     */
 	
-		//testLogToCaseBase();
+		testLogToCaseBase();
 		//testLoadCaseBase();
 		//testTrainAgent();		
-		testRunAgentFromFile();
+		//testRunAgentFromFile();
 		
 		
 	}//main
