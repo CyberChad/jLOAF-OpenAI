@@ -104,19 +104,15 @@ public class PerformanceTest extends PerformanceEvaluator
 	  
 	public static void main(String[] args)
 	{
-		readConfig();
+		//readConfig();
 		
 		System.out.println("Starting Performance Evaluation");
-
-		
 		
 		String [] filenames = 
 			{"cartpole100.log"
 			,"cartpole200.log"
 			,"cartpole300.log"
-			//,"lander4.log"
-			//,"lander5.log"
-					};
+			};
 		
 		String [] reasoners =
 			{"ONEKNN"
