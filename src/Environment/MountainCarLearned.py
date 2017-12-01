@@ -72,7 +72,7 @@ if __name__=="__main__":
         
         output = ["{:+0.2f}".format(x) for x in s]            
         output.append(a)
-        print output
+        print(output)
         
         #print(["{:+0.2f}".format(x) for x in s]+"{:+0.2f}".format(a))        
         

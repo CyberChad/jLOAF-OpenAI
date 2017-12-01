@@ -43,6 +43,7 @@ import AgentModules.OpenAIAction;
 import AgentModules.OpenAIAgent;
 import AgentModules.OpenAIInput;
 import AgentModules.OpenAIAction.Actions;
+import CaseBaseCreation.LogFile2CaseBase;
 import py4j.GatewayServer;
 
 
@@ -60,8 +61,8 @@ public class JloafClient
 	
 	
 	/* LogFile2CaseBase vars */
-	protected static String log_file = "tests/lander5000.log";			
-	protected static String cb_file = "tests/lander5000.cb";	
+	protected static String log_file = "lander1.log";			
+	protected static String cb_file = "lander1.cb";	
 	protected static int features = 0;
 	
 	ComplexSimilarityMetricStrategy complexStrat;
@@ -402,7 +403,13 @@ public class JloafClient
 		
 		File file = new File(log_file);
 		
+		
+		LogFile2CaseBase lfcb = new LogFile2CaseBase();
+
+		String cb_file = lfcb.parseLogFile(log_file,log_file+".cb");
+		
 		CaseBase cb = CaseBase.load(cb_file);
+		
 		CaseBaseFilter ft = new HillClimbingFeatureSelection(null);
 		
 		System.out.println("...Loading Agent...");
@@ -556,10 +563,11 @@ public class JloafClient
 		public String testCommand(int i, String s);
 		public String getInfo();
 		
-		// --- Init ---
+		// --- Init & Reset ---
 		public void makeEnv(String env);
 		public void resetEnv();	
-		
+		public int isDone();	
+
 		//--- MOVE TO PERCEPTION ---
 	    public double[] getActions();
 	    public double[] getObservations();

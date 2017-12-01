@@ -11,6 +11,7 @@ import sys
 import random
 
 import numpy as np
+from asn1crypto._ffi import null
 
 
 feedback = []
@@ -27,11 +28,43 @@ sys.path.append("/home/chad/github/NMAI/jLOAF-OpenAI/bin")
 
 class GymEnv(object):
 
+    #env, state, info, reward, done
+
     def testCommand(self, int_value=None, string_value=None):
-        print(int_value, string_value)
-        env = gym.make('CartPole-v0' if len(sys.argv)<2 else sys.argv[1])
+        print("Test COmmand: "+int_value, string_value)
         return "Sent command: {0}".format(string_value)
 
+
+    def getInfo(self, int_value=None, string_value=None):
+            print(int_value, string_value)
+            env = gym.make('CartPole-v0' if len(sys.argv)<2 else sys.argv[1])
+            return "Sent command: {0}".format(string_value)
+    
+    def makeEnv(self, string_value=None):
+        
+        print("Making Environment: "+string_value)
+        
+        if (string_value ):
+            env = gym.make(string_value)
+
+    def resetEnv(self):
+        
+        print("Reset Environment")
+        state = env.reset()
+
+    def isDone(self):
+        
+        print("Asking if Done")
+        return done
+    
+    def doAction(self, action=None):
+        
+        print("Doing Action")
+        
+        state, reward, done, info = env.step(action)
+        return state
+
+            
     class Java:
         implements = ["Environment.GymEnv"]
 

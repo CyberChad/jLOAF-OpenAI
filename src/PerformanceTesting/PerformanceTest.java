@@ -111,11 +111,11 @@ public class PerformanceTest extends PerformanceEvaluator
 		
 		
 		String [] filenames = 
-			{"lander1.log"
-			,"lander2.log"
-			,"lander3.log"
-			,"lander4.log"
-			,"lander5.log"
+			{"cartpole100.log"
+			,"cartpole200.log"
+			,"cartpole300.log"
+			//,"lander4.log"
+			//,"lander5.log"
 					};
 		
 		String [] reasoners =
