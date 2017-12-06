@@ -5,17 +5,37 @@ import sys, gym
 
 from gym import wrappers
 
+from py4j.clientserver import ClientServer, JavaParameters, PythonParameters
+
+from py4j.java_gateway import JavaGateway
+
+
 import argparse
 import logging
 import sys
 import random
 
 import numpy as np
-from asn1crypto._ffi import null
+#from asn1crypto._ffi import null
 
 
 feedback = []
 controls = []
+
+DEBUG_MSG = False
+DEBUG_ACTION = False
+
+
+
+env = 0
+state = 0
+reward = 0
+done = False
+info = 0
+ob_space = 4
+action_space = 4
+
+
 #
 # Test yourself as a learning agent! Pass environment name as a command-line argument.
 #
@@ -26,44 +46,70 @@ controls = []
 #may need this if we have to call the jLOAF module directly
 sys.path.append("/home/chad/github/NMAI/jLOAF-OpenAI/bin")
 
+class globals():
+    env = 0
+    state = 0
+    reward = 0
+    done = False
+    info = 0
+    ob_space = 4
+    action_space = 4    
+
 class GymEnv(object):
 
-    #env, state, info, reward, done
-
+    
     def testCommand(self, int_value=None, string_value=None):
-        print("Test COmmand: "+int_value, string_value)
-        return "Sent command: {0}".format(string_value)
-
+        print(int_value, string_value)
+        return "TestCommand: {0} {1}".format(int_value, string_value)
 
     def getInfo(self, int_value=None, string_value=None):
             print(int_value, string_value)
-            env = gym.make('CartPole-v0' if len(sys.argv)<2 else sys.argv[1])
+            globals.env = gym.make('CartPole-v0' if len(sys.argv)<2 else sys.argv[1])
             return "Sent command: {0}".format(string_value)
     
-    def makeEnv(self, string_value=None):
+    def makeEnv(self, environment=None):
         
-        print("Making Environment: "+string_value)
+        print ("Command: makeEnv" + " Value: {0}".format(environment))
         
-        if (string_value ):
-            env = gym.make(string_value)
+        if (environment):
+            globals.env = gym.make(environment)
+            globals.env.reset();
+            #globals.ob_space = globals.env.observation_space
+            
+        return "Making Environment: {0}".format(environment)
 
     def resetEnv(self):
         
         print("Reset Environment")
-        state = env.reset()
+        globals.state = globals.env.reset()
+        #globals.done = False
+        return ("Reset Environment")
 
     def isDone(self):
         
-        print("Asking if Done")
-        return done
+        if(DEBUG_MSG) : print("Asking if Done")
+        return globals.done
     
     def doAction(self, action=None):
         
-        print("Doing Action")
+        if(DEBUG_ACTION): print("Do Action: {0}".format(action))
         
-        state, reward, done, info = env.step(action)
-        return state
 
+        
+        #action = 1
+        state, \
+        globals.reward, \
+        globals.done, \
+        globals.info = globals.env.step(action)
+        
+        #globals.env.step(action)
+        globals.env.render()
+        
+        state_size = state.size
+        
+        state_string = ','.join(['%.2f' % num for num in state])
+        
+        return state_string
             
     class Java:
         implements = ["Environment.GymEnv"]
@@ -73,14 +119,18 @@ print ("-- Opening GymDoor Server -- ")
 
 gym_env = GymEnv()
 
-# Make sure that the python code is started first.
-# Then execute: java -cp py4j.jar py4j.examples.SingleThreadClientApplication
-from py4j.clientserver import ClientServer, JavaParameters, PythonParameters
+done = False
+
 
 gateway = ClientServer(
     java_parameters=JavaParameters(),
     python_parameters=PythonParameters(),
     python_server_entry_point=gym_env)
+
+# Make sure that the python code is started first.
+# Then execute: java -cp py4j.jar py4j.examples.SingleThreadClientApplication
+
+
 
 
 

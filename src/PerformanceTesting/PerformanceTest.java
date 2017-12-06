@@ -17,6 +17,8 @@ import org.jLOAF.casebase.CaseBase;
 import org.jLOAF.performance.PerformanceEvaluator;
 import org.jLOAF.preprocessing.filter.CaseBaseFilter;
 import org.jLOAF.preprocessing.filter.featureSelection.HillClimbingFeatureSelection;
+import org.jLOAF.preprocessing.filter.featureSelection.WeightsSeperatorFilter;
+import org.jLOAF.preprocessing.standardization.Standardization;
 
 import AgentModules.OpenAIAgent;
 import CaseBaseCreation.LogFile2CaseBase;
@@ -108,10 +110,32 @@ public class PerformanceTest extends PerformanceEvaluator
 		
 		System.out.println("Starting Performance Evaluation");
 		
+		/*
+		 * Example taken from jLOAF-Robocup
+		 *  
+		String [] filenames = {"Data_wstate/Carleton_1.lsf","Data_wstate/Carleton_2.lsf","Data_wstate/Carleton_3.lsf","Data_wstate/Carleton_4.lsf","Data_wstate/Carleton_5.lsf","Data_wstate/University_1.lsf","Data_wstate/University_2.lsf","Data_wstate/University_3.lsf","Data_wstate/University_4.lsf","Data_wstate/University_5.lsf"};
+		String output_filename = "Results/Model3Gaussian,DBN,standardize,none,none,none,.csv";
+				
+		CaseBaseFilter WSF = new WeightsSeperatorFilter(null);
+		CaseBaseFilter standardize = new Standardization(WSF);
+		//CaseBaseFilter smote = new UnderSampling(standardize);
+		//CaseBaseFilter sample = new Sampling(standardize);
+		PerformanceTest pt = new PerformanceTest();
+		pt.PerformanceEvaluatorMethod(filenames, standardize, output_filename,"dbn",null, null);
+
+		 */
+		
+		
+		
+		
 		String [] filenames = 
-			{"cartpole100.log"
-			,"cartpole200.log"
-			,"cartpole300.log"
+			/*{"lander1000.log"
+			,"lander2000.log"
+			,"lander3000.log"
+			,"lander4000.log"
+			*/
+			{"landerALL5000.log"
+			,"landerALL5000.log"
 			};
 		
 		String [] reasoners =
