@@ -1,0 +1,310 @@
+Starting Performance Evaluation
+numlines: 10
+file :0 name: cartpole01k.log
+file :1 name: cartpole02k.log
+file :2 name: cartpole03k.log
+file :3 name: cartpole04k.log
+file :4 name: cartpole05k.log
+file :5 name: cartpole06k.log
+file :6 name: cartpole07k.log
+file :7 name: cartpole08k.log
+file :8 name: cartpole09k.log
+file :9 name: cartpole10k.log
+numlines: 3
+reasoner :0 name: ONEKNN
+reasoner :1 name: KNN
+reasoner :2 name: weightedKNN
+Starting Evaluation 0: ONEKNN
+***parsing log file: cartpole01k.log
+done with creating one caseBase
+***parsing log file: cartpole02k.log
+done with creating one caseBase
+***parsing log file: cartpole03k.log
+done with creating one caseBase
+***parsing log file: cartpole04k.log
+done with creating one caseBase
+***parsing log file: cartpole05k.log
+done with creating one caseBase
+***parsing log file: cartpole06k.log
+done with creating one caseBase
+***parsing log file: cartpole07k.log
+done with creating one caseBase
+***parsing log file: cartpole08k.log
+done with creating one caseBase
+***parsing log file: cartpole09k.log
+done with creating one caseBase
+***parsing log file: cartpole10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.965 seconds
+performing Filtering on the casesbases
+time Taken to Filter is 0.896 seconds
+CaseBase size: 611
+TestBase size: 76
+Cycle: 0 - Starting testing...
+Testing complete in: 2.3333333333333333E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.646 seconds
+CaseBase size: 618
+TestBase size: 82
+Cycle: 1 - Starting testing...
+Testing complete in: 2.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.677 seconds
+CaseBase size: 643
+TestBase size: 68
+Cycle: 2 - Starting testing...
+Testing complete in: 1.6666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.654 seconds
+CaseBase size: 623
+TestBase size: 107
+Cycle: 3 - Starting testing...
+Testing complete in: 2.8333333333333335E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.602 seconds
+CaseBase size: 579
+TestBase size: 126
+Cycle: 4 - Starting testing...
+Testing complete in: 3.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.641 seconds
+CaseBase size: 620
+TestBase size: 80
+Cycle: 5 - Starting testing...
+Testing complete in: 2.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.641 seconds
+CaseBase size: 629
+TestBase size: 83
+Cycle: 6 - Starting testing...
+Testing complete in: 2.1666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.633 seconds
+CaseBase size: 601
+TestBase size: 71
+Cycle: 7 - Starting testing...
+Testing complete in: 1.6666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.638 seconds
+CaseBase size: 622
+TestBase size: 70
+Cycle: 8 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.645 seconds
+CaseBase size: 588
+TestBase size: 108
+Cycle: 9 - Starting testing...
+Testing complete in: 2.666666666666667E-4 min
+Total testing time: 0.11376666666666667 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|               Recall_0.0|    0.7211|    0.0752| 
+|  Classification_Accuracy|    0.7289|    0.0211| 
+|               Recall_1.0|    0.7377|    0.0340| 
+|                Global_F1|    0.7283|    0.0212| 
+|            Precision_0.0|    0.7490|    0.0202| 
+|            Precision_1.0|    0.7121|    0.0634| 
+|                   F1_1.0|    0.7232|    0.0146| 
+|                   F1_0.0|    0.7333|    0.0278| 
+|_______________________________________________| 
+Done
+Done
+Starting Evaluation 1: KNN
+***parsing log file: cartpole01k.log
+done with creating one caseBase
+***parsing log file: cartpole02k.log
+done with creating one caseBase
+***parsing log file: cartpole03k.log
+done with creating one caseBase
+***parsing log file: cartpole04k.log
+done with creating one caseBase
+***parsing log file: cartpole05k.log
+done with creating one caseBase
+***parsing log file: cartpole06k.log
+done with creating one caseBase
+***parsing log file: cartpole07k.log
+done with creating one caseBase
+***parsing log file: cartpole08k.log
+done with creating one caseBase
+***parsing log file: cartpole09k.log
+done with creating one caseBase
+***parsing log file: cartpole10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.826 seconds
+performing Filtering on the casesbases
+time Taken to Filter is 0.679 seconds
+CaseBase size: 611
+TestBase size: 76
+Cycle: 0 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.641 seconds
+CaseBase size: 618
+TestBase size: 82
+Cycle: 1 - Starting testing...
+Testing complete in: 2.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.678 seconds
+CaseBase size: 643
+TestBase size: 68
+Cycle: 2 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.644 seconds
+CaseBase size: 623
+TestBase size: 107
+Cycle: 3 - Starting testing...
+Testing complete in: 2.666666666666667E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.597 seconds
+CaseBase size: 579
+TestBase size: 126
+Cycle: 4 - Starting testing...
+Testing complete in: 3.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.634 seconds
+CaseBase size: 620
+TestBase size: 80
+Cycle: 5 - Starting testing...
+Testing complete in: 2.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.638 seconds
+CaseBase size: 629
+TestBase size: 83
+Cycle: 6 - Starting testing...
+Testing complete in: 2.1666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.63 seconds
+CaseBase size: 601
+TestBase size: 71
+Cycle: 7 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.634 seconds
+CaseBase size: 622
+TestBase size: 70
+Cycle: 8 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.637 seconds
+CaseBase size: 588
+TestBase size: 108
+Cycle: 9 - Starting testing...
+Testing complete in: 2.666666666666667E-4 min
+Total testing time: 0.10915 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|               Recall_0.0|    0.7298|    0.1035| 
+|  Classification_Accuracy|    0.7363|    0.0415| 
+|               Recall_1.0|    0.7422|    0.0200| 
+|                Global_F1|    0.7348|    0.0423| 
+|            Precision_0.0|    0.7585|    0.0085| 
+|            Precision_1.0|    0.7212|    0.0913| 
+|                   F1_1.0|    0.7287|    0.0360| 
+|                   F1_0.0|    0.7410|    0.0485| 
+|_______________________________________________| 
+Done
+Done
+Starting Evaluation 2: weightedKNN
+***parsing log file: cartpole01k.log
+done with creating one caseBase
+***parsing log file: cartpole02k.log
+done with creating one caseBase
+***parsing log file: cartpole03k.log
+done with creating one caseBase
+***parsing log file: cartpole04k.log
+done with creating one caseBase
+***parsing log file: cartpole05k.log
+done with creating one caseBase
+***parsing log file: cartpole06k.log
+done with creating one caseBase
+***parsing log file: cartpole07k.log
+done with creating one caseBase
+***parsing log file: cartpole08k.log
+done with creating one caseBase
+***parsing log file: cartpole09k.log
+done with creating one caseBase
+***parsing log file: cartpole10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.797 seconds
+performing Filtering on the casesbases
+time Taken to Filter is 0.678 seconds
+CaseBase size: 611
+TestBase size: 76
+Cycle: 0 - Starting testing...
+Testing complete in: 2.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.633 seconds
+CaseBase size: 618
+TestBase size: 82
+Cycle: 1 - Starting testing...
+Testing complete in: 2.1666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.678 seconds
+CaseBase size: 643
+TestBase size: 68
+Cycle: 2 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.641 seconds
+CaseBase size: 623
+TestBase size: 107
+Cycle: 3 - Starting testing...
+Testing complete in: 2.666666666666667E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.595 seconds
+CaseBase size: 579
+TestBase size: 126
+Cycle: 4 - Starting testing...
+Testing complete in: 3.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.631 seconds
+CaseBase size: 620
+TestBase size: 80
+Cycle: 5 - Starting testing...
+Testing complete in: 2.0E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.637 seconds
+CaseBase size: 629
+TestBase size: 83
+Cycle: 6 - Starting testing...
+Testing complete in: 2.1666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.627 seconds
+CaseBase size: 601
+TestBase size: 71
+Cycle: 7 - Starting testing...
+Testing complete in: 1.8333333333333334E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.633 seconds
+CaseBase size: 622
+TestBase size: 70
+Cycle: 8 - Starting testing...
+Testing complete in: 1.6666666666666666E-4 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.632 seconds
+CaseBase size: 588
+TestBase size: 108
+Cycle: 9 - Starting testing...
+Testing complete in: 2.5E-4 min
+Total testing time: 0.10868333333333334 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|               Recall_0.0|    0.7298|    0.1035| 
+|  Classification_Accuracy|    0.7363|    0.0415| 
+|               Recall_1.0|    0.7422|    0.0200| 
+|                Global_F1|    0.7348|    0.0423| 
+|            Precision_0.0|    0.7585|    0.0085| 
+|            Precision_1.0|    0.7212|    0.0913| 
+|                   F1_1.0|    0.7287|    0.0360| 
+|                   F1_0.0|    0.7410|    0.0485| 
+|_______________________________________________| 
+Done
+Done

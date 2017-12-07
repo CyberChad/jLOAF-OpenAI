@@ -40,14 +40,14 @@ if __name__=="__main__":
 
     env = gym.make("MountainCar-v0")
 
-    print("Action Space:")
-    print(env.action_space)
+    #print("Action Space:")
+    #print(env.action_space)
     
     
-    print("Observation Space:")
-    print(env.observation_space)
-    print(env.observation_space.high)
-    print(env.observation_space.low)
+    #print("Observation Space:")
+    #print(env.observation_space)
+    #print(env.observation_space.high)
+    #print(env.observation_space.low)
     
     #write some transform to dynamically generate parameter matrix        
     
@@ -59,7 +59,7 @@ if __name__=="__main__":
     
     s = env.reset()
     
-    while steps < 5000:
+    while steps < 1000:
         
         action = heuristic(s)
         a = np.argmax(action)
@@ -69,7 +69,7 @@ if __name__=="__main__":
         total_reward += r
         #if steps % 20 == 0 or done:
         
-        
+        #output = ','.join(['%.2f' % num for num in s])
         output = ["{:+0.2f}".format(x) for x in s]            
         output.append(a)
         print(output)

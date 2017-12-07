@@ -45,7 +45,6 @@ import AgentModules.OpenAIAgent;
 import AgentModules.OpenAIInput;
 import AgentModules.OpenAIAction.Actions;
 import CaseBaseCreation.LogFile2CaseBase;
-import Environment.JloafClient2.GymEnv;
 import py4j.GatewayServer;
 
 

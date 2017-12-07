@@ -66,7 +66,7 @@ public class LogFile2CaseBase
 		File file= new File(file1);
 		CaseBase cb = new CaseBase();
 		
-		System.out.println("***parsing log file***");
+		System.out.println("***parsing log file: "+file1);
 
 		int counter=0;
 		double next_double=0;
@@ -86,27 +86,50 @@ public class LogFile2CaseBase
 				line = sc.nextLine(); 
 			}
 			
+			line = line.replace("[", "");
+			line = line.replace("]", "");
+			line = line.replace("'", "");
+			line = line.replace(" ", "");
+			
+			if(DEBUG) System.out.println("Clean Row: "+line);
+			
 			//initialize entry array
-			entries_s = line.split("\\s");
+			entries_s = line.split(",");
 			int row_length = entries_s.length;			
 			entries_d = new double[row_length];			
 			sc.reset(); //back to beginning
 			
-			System.out.println("Row length: "+row_length);
+			if(DEBUG) System.out.println("Row length: "+row_length);
 			
+			String tmpd;
 			
 			while(sc.hasNextLine())
 			{
 				line = sc.nextLine();				
 				
+				if(DEBUG) System.out.println("Next line: "+line);
+
+				line = line.replace("[", "");
+				line = line.replace("]", "");
+				line = line.replace("'", "");
+				line = line.replace(" ", "");
+				
+				if(DEBUG) System.out.println("Next clean line: "+line);
+				
 				try
 				{
-					entries_s = line.split("\\s");								
+					if(DEBUG)System.out.println("enter try");
+					entries_s = line.split(",");								
 					entries_d = new double[row_length];
 					
 					for( int index=0; index < row_length; index++)
 					{
-						next_double = sc.nextDouble();
+						if(DEBUG)System.out.println("For block ix: "+index);
+						
+						tmpd = entries_s[index];
+						if(DEBUG)System.out.println("next_double_s: "+tmpd);
+						next_double = Double.valueOf(tmpd).doubleValue();
+						if(DEBUG)System.out.println("next_double_d: "+next_double);
 						if (DEBUG) System.out.println("Index: "+index+" Value: "+next_double);
 						entries_d[index] = next_double;
 					}

@@ -1,7 +1,8 @@
 package PerformanceTesting;
 
-import java.io.IOException;
 import java.io.*;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -10,12 +11,12 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
-import java.io.File;
-
 import org.jLOAF.Agent;
 import org.jLOAF.casebase.CaseBase;
 import org.jLOAF.performance.PerformanceEvaluator;
 import org.jLOAF.preprocessing.filter.CaseBaseFilter;
+import org.jLOAF.preprocessing.filter.casebasefilter.Sampling;
+import org.jLOAF.preprocessing.filter.casebasefilter.UnderSampling;
 import org.jLOAF.preprocessing.filter.featureSelection.HillClimbingFeatureSelection;
 import org.jLOAF.preprocessing.filter.featureSelection.WeightsSeperatorFilter;
 import org.jLOAF.preprocessing.standardization.Standardization;
@@ -35,6 +36,7 @@ public class PerformanceTest extends PerformanceEvaluator
 {
 	private static String[] filenames;
 	private static String [] reasoners;
+	private static File logfiles; 
 	
 	  private static void readConfig()
 	  {
@@ -110,33 +112,107 @@ public class PerformanceTest extends PerformanceEvaluator
 		
 		System.out.println("Starting Performance Evaluation");
 		
-		/*
-		 * Example taken from jLOAF-Robocup
-		 *  
-		String [] filenames = {"Data_wstate/Carleton_1.lsf","Data_wstate/Carleton_2.lsf","Data_wstate/Carleton_3.lsf","Data_wstate/Carleton_4.lsf","Data_wstate/Carleton_5.lsf","Data_wstate/University_1.lsf","Data_wstate/University_2.lsf","Data_wstate/University_3.lsf","Data_wstate/University_4.lsf","Data_wstate/University_5.lsf"};
-		String output_filename = "Results/Model3Gaussian,DBN,standardize,none,none,none,.csv";
-				
-		CaseBaseFilter WSF = new WeightsSeperatorFilter(null);
-		CaseBaseFilter standardize = new Standardization(WSF);
+		//CaseBaseFilter WSF = new WeightsSeperatorFilter(null);
+		//CaseBaseFilter standardize = new Standardization(WSF);
 		//CaseBaseFilter smote = new UnderSampling(standardize);
 		//CaseBaseFilter sample = new Sampling(standardize);
-		PerformanceTest pt = new PerformanceTest();
-		pt.PerformanceEvaluatorMethod(filenames, standardize, output_filename,"dbn",null, null);
+		
 
-		 */
+		//PerformanceTest pt = new PerformanceTest();
+		//pt.PerformanceEvaluatorMethod(filenames, standardize, output_filename,"dbn",null, null);
+
+		 
+		File logfiles = new File("logfiles-lunar.cfg");
+		File reasonfiles = new File("reasoners.cfg");
+				
+		//load the filenames of log files
 		
 		
+		try
+		{
+			String line = null;			
+			Scanner sc = new Scanner(logfiles);
+			
+			//get first line
+			if (sc.hasNextLine())
+			{
+				line = sc.nextLine(); 
+			}
+			line.replace(" ", ""); //strip whitespace
+			
+			int ix = 0;
+			int numlines = Integer.valueOf(line);
+			
+			System.out.println("numlines: "+numlines);
+			
+			filenames = new String[numlines];
+			
+			while(sc.hasNextLine())
+			{
+				line = sc.nextLine();				
+				line.replace(" ", ""); //strip whitespace
+				
+				filenames[ix] = line;
+				System.out.println("file :"+ix+" name: "+filenames[ix]);
+				ix++;
+
+			}//while
+			
+			sc.close();
+			
+		}//try
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		try
+		{
+			String line = null;			
+			Scanner sc = new Scanner(reasonfiles);
+			
+			//get first line
+			if (sc.hasNextLine())
+			{
+				line = sc.nextLine(); 
+			}
+			line.replace(" ", ""); //strip whitespace
+			
+			int ix = 0;
+			int numlines = Integer.valueOf(line);
+			
+			System.out.println("numlines: "+numlines);
+			
+			reasoners = new String[numlines];
+			
+			while(sc.hasNextLine())
+			{
+				line = sc.nextLine();				
+				line.replace(" ", ""); //strip whitespace
+				
+				reasoners[ix] = line;
+				System.out.println("reasoner :"+ix+" name: "+reasoners[ix]);
+				ix++;
+
+			}//while
+			
+			sc.close();
+			
+		}//try
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		String [] filenames = 
-			/*{"lander1000.log"
-			,"lander2000.log"
-			,"lander3000.log"
-			,"lander4000.log"
-			*/
-			{"landerALL5000.log"
-			,"landerALL5000.log"
-			};
+		/*		
+	    String [] filenames = 
+	    		 {"mountain01k.log"	    	 
+	    	      ,"mountain02k.log"
+	    	      ,"mountain03k.log"
+	    	      };
+
 		
 		String [] reasoners =
 			{"ONEKNN"
@@ -144,9 +220,14 @@ public class PerformanceTest extends PerformanceEvaluator
 			,"weightedKNN"
 			};
 		
+		*/
 		//String [] outputFilenames = createArrayOfCasebaseNames(filenames);
 		//String output_filename = "Results/SomeGymStuff,TB,standardize,none,none,none,.csv";
 		
+		CaseBaseFilter oversample = new Sampling(null);
+		CaseBaseFilter undersample = new UnderSampling(null);
+		CaseBaseFilter bothsample = new Sampling(undersample);
+
 		PerformanceTest pt = new PerformanceTest();
 		
 		//CaseBaseFilter ft = new HillClimbingFeatureSelection(null);
@@ -159,7 +240,7 @@ public class PerformanceTest extends PerformanceEvaluator
 			for(int i=0; i < num_reasons; i++)
 			{
 				System.out.println("Starting Evaluation "+i+": "+reasoners[i]);
-				pt.PerformanceEvaluatorMethod(filenames,null,"tests/gymOutput.txt",reasoners[i],null,null);
+				pt.PerformanceEvaluatorMethod(filenames,bothsample,"gymOutput.txt",reasoners[i],null,null);
 			}//for
 		}//try 
 		catch (IOException e) 

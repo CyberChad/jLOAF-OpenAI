@@ -1,0 +1,319 @@
+Starting Performance Evaluation
+numlines: 10
+file :0 name: mountain01k.log
+file :1 name: mountain02k.log
+file :2 name: mountain03k.log
+file :3 name: mountain04k.log
+file :4 name: mountain05k.log
+file :5 name: mountain06k.log
+file :6 name: mountain07k.log
+file :7 name: mountain08k.log
+file :8 name: mountain09k.log
+file :9 name: mountain10k.log
+numlines: 3
+reasoner :0 name: ONEKNN
+reasoner :1 name: KNN
+reasoner :2 name: weightedKNN
+Starting Evaluation 0: ONEKNN
+***parsing log file: mountain01k.log
+done with creating one caseBase
+***parsing log file: mountain02k.log
+done with creating one caseBase
+***parsing log file: mountain03k.log
+done with creating one caseBase
+***parsing log file: mountain04k.log
+done with creating one caseBase
+***parsing log file: mountain05k.log
+done with creating one caseBase
+***parsing log file: mountain06k.log
+done with creating one caseBase
+***parsing log file: mountain07k.log
+done with creating one caseBase
+***parsing log file: mountain08k.log
+done with creating one caseBase
+***parsing log file: mountain09k.log
+done with creating one caseBase
+***parsing log file: mountain10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.448 seconds
+performing Filtering on the casesbases
+time Taken to Filter is 0.04 seconds
+CaseBase size: 6618
+TestBase size: 723
+Cycle: 0 - Starting testing...
+Testing complete in: 0.0273 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.035 seconds
+CaseBase size: 6477
+TestBase size: 726
+Cycle: 1 - Starting testing...
+Testing complete in: 0.02255 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.014 seconds
+CaseBase size: 6329
+TestBase size: 739
+Cycle: 2 - Starting testing...
+Testing complete in: 0.01951666666666667 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.01 seconds
+CaseBase size: 6220
+TestBase size: 717
+Cycle: 3 - Starting testing...
+Testing complete in: 0.019216666666666667 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.011 seconds
+CaseBase size: 6046
+TestBase size: 751
+Cycle: 4 - Starting testing...
+Testing complete in: 0.019216666666666667 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.009 seconds
+CaseBase size: 5966
+TestBase size: 707
+Cycle: 5 - Starting testing...
+Testing complete in: 0.016283333333333334 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.007 seconds
+CaseBase size: 5787
+TestBase size: 740
+Cycle: 6 - Starting testing...
+Testing complete in: 0.01705 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.006 seconds
+CaseBase size: 5687
+TestBase size: 710
+Cycle: 7 - Starting testing...
+Testing complete in: 0.0165 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.006 seconds
+CaseBase size: 5529
+TestBase size: 724
+Cycle: 8 - Starting testing...
+Testing complete in: 0.015116666666666667 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.005 seconds
+CaseBase size: 5330
+TestBase size: 785
+Cycle: 9 - Starting testing...
+Testing complete in: 0.016183333333333334 min
+Total testing time: 0.19176666666666667 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|                   F1_2.0|    0.9827|    0.0135| 
+|               Recall_0.0|    0.9866|    0.0212| 
+|  Classification_Accuracy|    0.9835|    0.0077| 
+|               Recall_1.0|    0.9911|    0.0089| 
+|                Global_F1|    0.9836|    0.0066| 
+|               Recall_2.0|    0.9755|    0.0046| 
+|            Precision_0.0|    0.9804|    0.0036| 
+|            Precision_2.0|    0.9901|    0.0227| 
+|            Precision_1.0|    0.9782|    0.0036| 
+|                   F1_1.0|    0.9846|    0.0025| 
+|                   F1_0.0|    0.9834|    0.0088| 
+|_______________________________________________| 
+Done
+Done
+Starting Evaluation 1: KNN
+***parsing log file: mountain01k.log
+done with creating one caseBase
+***parsing log file: mountain02k.log
+done with creating one caseBase
+***parsing log file: mountain03k.log
+done with creating one caseBase
+***parsing log file: mountain04k.log
+done with creating one caseBase
+***parsing log file: mountain05k.log
+done with creating one caseBase
+***parsing log file: mountain06k.log
+done with creating one caseBase
+***parsing log file: mountain07k.log
+done with creating one caseBase
+***parsing log file: mountain08k.log
+done with creating one caseBase
+***parsing log file: mountain09k.log
+done with creating one caseBase
+***parsing log file: mountain10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.296 seconds
+performing Filtering on the casesbases
+time Taken to Filter is 0.02 seconds
+CaseBase size: 6618
+TestBase size: 723
+Cycle: 0 - Starting testing...
+Testing complete in: 0.019016666666666668 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.012 seconds
+CaseBase size: 6477
+TestBase size: 726
+Cycle: 1 - Starting testing...
+Testing complete in: 0.018133333333333335 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.011 seconds
+CaseBase size: 6329
+TestBase size: 739
+Cycle: 2 - Starting testing...
+Testing complete in: 0.018116666666666666 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.01 seconds
+CaseBase size: 6220
+TestBase size: 717
+Cycle: 3 - Starting testing...
+Testing complete in: 0.01715 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.009 seconds
+CaseBase size: 6046
+TestBase size: 751
+Cycle: 4 - Starting testing...
+Testing complete in: 0.017133333333333334 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.008 seconds
+CaseBase size: 5966
+TestBase size: 707
+Cycle: 5 - Starting testing...
+Testing complete in: 0.016266666666666665 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.007 seconds
+CaseBase size: 5787
+TestBase size: 740
+Cycle: 6 - Starting testing...
+Testing complete in: 0.0166 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.008 seconds
+CaseBase size: 5687
+TestBase size: 710
+Cycle: 7 - Starting testing...
+Testing complete in: 0.015966666666666667 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.006 seconds
+CaseBase size: 5529
+TestBase size: 724
+Cycle: 8 - Starting testing...
+Testing complete in: 0.015466666666666667 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.005 seconds
+CaseBase size: 5330
+TestBase size: 785
+Cycle: 9 - Starting testing...
+Testing complete in: 0.01585 min
+Total testing time: 0.17141666666666666 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|                   F1_2.0|    0.9857|    0.0014| 
+|               Recall_0.0|    0.9927|    0.0022| 
+|  Classification_Accuracy|    0.9856|    0.0016| 
+|               Recall_1.0|    0.9926|    0.0074| 
+|                Global_F1|    0.9857|    0.0012| 
+|               Recall_2.0|    0.9736|    0.0009| 
+|            Precision_0.0|    0.9784|    0.0090| 
+|            Precision_2.0|    0.9981|    0.0019| 
+|            Precision_1.0|    0.9792|    0.0095| 
+|                   F1_1.0|    0.9858|    0.0012| 
+|                   F1_0.0|    0.9855|    0.0035| 
+|_______________________________________________| 
+Done
+Done
+Starting Evaluation 2: weightedKNN
+***parsing log file: mountain01k.log
+done with creating one caseBase
+***parsing log file: mountain02k.log
+done with creating one caseBase
+***parsing log file: mountain03k.log
+done with creating one caseBase
+***parsing log file: mountain04k.log
+done with creating one caseBase
+***parsing log file: mountain05k.log
+done with creating one caseBase
+***parsing log file: mountain06k.log
+done with creating one caseBase
+***parsing log file: mountain07k.log
+done with creating one caseBase
+***parsing log file: mountain08k.log
+done with creating one caseBase
+***parsing log file: mountain09k.log
+done with creating one caseBase
+***parsing log file: mountain10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.312 seconds
+performing Filtering on the casesbases
+time Taken to Filter is 0.017 seconds
+CaseBase size: 6618
+TestBase size: 723
+Cycle: 0 - Starting testing...
+Testing complete in: 0.018783333333333332 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.011 seconds
+CaseBase size: 6477
+TestBase size: 726
+Cycle: 1 - Starting testing...
+Testing complete in: 0.017833333333333333 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.011 seconds
+CaseBase size: 6329
+TestBase size: 739
+Cycle: 2 - Starting testing...
+Testing complete in: 0.017883333333333334 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.01 seconds
+CaseBase size: 6220
+TestBase size: 717
+Cycle: 3 - Starting testing...
+Testing complete in: 0.017233333333333333 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.01 seconds
+CaseBase size: 6046
+TestBase size: 751
+Cycle: 4 - Starting testing...
+Testing complete in: 0.017983333333333334 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.013 seconds
+CaseBase size: 5966
+TestBase size: 707
+Cycle: 5 - Starting testing...
+Testing complete in: 0.0172 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.007 seconds
+CaseBase size: 5787
+TestBase size: 740
+Cycle: 6 - Starting testing...
+Testing complete in: 0.01635 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.007 seconds
+CaseBase size: 5687
+TestBase size: 710
+Cycle: 7 - Starting testing...
+Testing complete in: 0.0156 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.006 seconds
+CaseBase size: 5529
+TestBase size: 724
+Cycle: 8 - Starting testing...
+Testing complete in: 0.0152 min
+performing Filtering on the casesbases
+time Taken to Filter is 0.005 seconds
+CaseBase size: 5330
+TestBase size: 785
+Cycle: 9 - Starting testing...
+Testing complete in: 0.015633333333333332 min
+Total testing time: 0.1714 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|                   F1_2.0|    0.9854|    0.0020| 
+|               Recall_0.0|    0.9927|    0.0010| 
+|  Classification_Accuracy|    0.9859|    0.0000| 
+|               Recall_1.0|    0.9940|    0.0060| 
+|                Global_F1|    0.9861|    0.0006| 
+|               Recall_2.0|    0.9736|    0.0064| 
+|            Precision_0.0|    0.9791|    0.0038| 
+|            Precision_2.0|    0.9974|    0.0026| 
+|            Precision_1.0|    0.9802|    0.0044| 
+|                   F1_1.0|    0.9870|    0.0052| 
+|                   F1_0.0|    0.9859|    0.0015| 
+|_______________________________________________| 
+Done
+Done

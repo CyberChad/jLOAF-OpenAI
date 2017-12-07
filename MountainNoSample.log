@@ -1,0 +1,259 @@
+Starting Performance Evaluation
+numlines: 10
+file :0 name: mountain01k.log
+file :1 name: mountain02k.log
+file :2 name: mountain03k.log
+file :3 name: mountain04k.log
+file :4 name: mountain05k.log
+file :5 name: mountain06k.log
+file :6 name: mountain07k.log
+file :7 name: mountain08k.log
+file :8 name: mountain09k.log
+file :9 name: mountain10k.log
+numlines: 3
+reasoner :0 name: ONEKNN
+reasoner :1 name: KNN
+reasoner :2 name: weightedKNN
+Starting Evaluation 0: ONEKNN
+***parsing log file: mountain01k.log
+done with creating one caseBase
+***parsing log file: mountain02k.log
+done with creating one caseBase
+***parsing log file: mountain03k.log
+done with creating one caseBase
+***parsing log file: mountain04k.log
+done with creating one caseBase
+***parsing log file: mountain05k.log
+done with creating one caseBase
+***parsing log file: mountain06k.log
+done with creating one caseBase
+***parsing log file: mountain07k.log
+done with creating one caseBase
+***parsing log file: mountain08k.log
+done with creating one caseBase
+***parsing log file: mountain09k.log
+done with creating one caseBase
+***parsing log file: mountain10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.45 seconds
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 0 - Starting testing...
+Testing complete in: 0.0346 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 1 - Starting testing...
+Testing complete in: 0.032216666666666664 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 2 - Starting testing...
+Testing complete in: 0.03261666666666667 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 3 - Starting testing...
+Testing complete in: 0.032433333333333335 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 4 - Starting testing...
+Testing complete in: 0.032466666666666665 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 5 - Starting testing...
+Testing complete in: 0.03253333333333333 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 6 - Starting testing...
+Testing complete in: 0.032466666666666665 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 7 - Starting testing...
+Testing complete in: 0.03285 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 8 - Starting testing...
+Testing complete in: 0.032466666666666665 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 9 - Starting testing...
+Testing complete in: 0.03245 min
+Total testing time: 0.32745 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|                   F1_2.0|    0.9885|    0.0003| 
+|               Recall_0.0|    0.9958|    0.0025| 
+|  Classification_Accuracy|    0.9879|    0.0011| 
+|               Recall_1.0|    0.9876|    0.0124| 
+|                Global_F1|    0.9872|    0.0019| 
+|               Recall_2.0|    0.9788|    0.0009| 
+|            Precision_0.0|    0.9814|    0.0030| 
+|            Precision_2.0|    0.9985|    0.0015| 
+|            Precision_1.0|    0.9815|    0.0019| 
+|                   F1_1.0|    0.9845|    0.0052| 
+|                   F1_0.0|    0.9885|    0.0003| 
+|_______________________________________________| 
+Done
+Done
+Starting Evaluation 1: KNN
+***parsing log file: mountain01k.log
+done with creating one caseBase
+***parsing log file: mountain02k.log
+done with creating one caseBase
+***parsing log file: mountain03k.log
+done with creating one caseBase
+***parsing log file: mountain04k.log
+done with creating one caseBase
+***parsing log file: mountain05k.log
+done with creating one caseBase
+***parsing log file: mountain06k.log
+done with creating one caseBase
+***parsing log file: mountain07k.log
+done with creating one caseBase
+***parsing log file: mountain08k.log
+done with creating one caseBase
+***parsing log file: mountain09k.log
+done with creating one caseBase
+***parsing log file: mountain10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.292 seconds
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 0 - Starting testing...
+Testing complete in: 0.03235 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 1 - Starting testing...
+Testing complete in: 0.031433333333333334 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 2 - Starting testing...
+Testing complete in: 0.0311 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 3 - Starting testing...
+Testing complete in: 0.03161666666666667 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 4 - Starting testing...
+Testing complete in: 0.03158333333333333 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 5 - Starting testing...
+Testing complete in: 0.03133333333333333 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 6 - Starting testing...
+Testing complete in: 0.03145 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 7 - Starting testing...
+Testing complete in: 0.031716666666666664 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 8 - Starting testing...
+Testing complete in: 0.0317 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 9 - Starting testing...
+Testing complete in: 0.03153333333333333 min
+Total testing time: 0.3158666666666667 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|                   F1_2.0|    0.9881|    0.0007| 
+|               Recall_0.0|    0.9949|    0.0039| 
+|  Classification_Accuracy|    0.9875|    0.0005| 
+|               Recall_1.0|    0.9895|    0.0105| 
+|                Global_F1|    0.9868|    0.0010| 
+|               Recall_2.0|    0.9780|    0.0002| 
+|            Precision_0.0|    0.9814|    0.0030| 
+|            Precision_2.0|    0.9985|    0.0015| 
+|            Precision_1.0|    0.9793|    0.0046| 
+|                   F1_1.0|    0.9843|    0.0029| 
+|                   F1_0.0|    0.9881|    0.0004| 
+|_______________________________________________| 
+Done
+Done
+Starting Evaluation 2: weightedKNN
+***parsing log file: mountain01k.log
+done with creating one caseBase
+***parsing log file: mountain02k.log
+done with creating one caseBase
+***parsing log file: mountain03k.log
+done with creating one caseBase
+***parsing log file: mountain04k.log
+done with creating one caseBase
+***parsing log file: mountain05k.log
+done with creating one caseBase
+***parsing log file: mountain06k.log
+done with creating one caseBase
+***parsing log file: mountain07k.log
+done with creating one caseBase
+***parsing log file: mountain08k.log
+done with creating one caseBase
+***parsing log file: mountain09k.log
+done with creating one caseBase
+***parsing log file: mountain10k.log
+done with creating one caseBase
+Time Taken to load casebases: 1.272 seconds
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 0 - Starting testing...
+Testing complete in: 0.030483333333333335 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 1 - Starting testing...
+Testing complete in: 0.030366666666666667 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 2 - Starting testing...
+Testing complete in: 0.030366666666666667 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 3 - Starting testing...
+Testing complete in: 0.0302 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 4 - Starting testing...
+Testing complete in: 0.0303 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 5 - Starting testing...
+Testing complete in: 0.030316666666666665 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 6 - Starting testing...
+Testing complete in: 0.030216666666666666 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 7 - Starting testing...
+Testing complete in: 0.0302 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 8 - Starting testing...
+Testing complete in: 0.030183333333333333 min
+CaseBase size: 8991
+TestBase size: 999
+Cycle: 9 - Starting testing...
+Testing complete in: 0.03045 min
+Total testing time: 0.3032166666666667 min
+Calculating stats...
+_________________________________________________ 
+|      Performance Measure|      Mean|    St.Dev| 
+|-----------------------------------------------| 
+|                   F1_2.0|    0.9881|    0.0007| 
+|               Recall_0.0|    0.9949|    0.0039| 
+|  Classification_Accuracy|    0.9875|    0.0005| 
+|               Recall_1.0|    0.9895|    0.0105| 
+|                Global_F1|    0.9868|    0.0010| 
+|               Recall_2.0|    0.9780|    0.0002| 
+|            Precision_0.0|    0.9814|    0.0030| 
+|            Precision_2.0|    0.9985|    0.0015| 
+|            Precision_1.0|    0.9793|    0.0046| 
+|                   F1_1.0|    0.9843|    0.0029| 
+|                   F1_0.0|    0.9881|    0.0004| 
+|_______________________________________________| 
+Done
+Done

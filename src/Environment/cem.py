@@ -45,7 +45,11 @@ def do_rollout(agent, env, num_steps, render=False):
         a = agent.act(ob)
         (ob, reward, done, _info) = env.step(a)
         
-        print (ob,a)        
+        output = ["{:+0.2f}".format(x) for x in ob]            
+        output.append(a)
+        print(output)
+        
+        #print (ob,a)        
         
         
         total_rew += reward
