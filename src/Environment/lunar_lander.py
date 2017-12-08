@@ -396,7 +396,7 @@ if __name__=="__main__":
     total_reward = 0
     steps = 0
     
-    while steps < 1000:
+    while steps < 10000:
         a = heuristic(env, s)
         s, r, done, info = env.step(a)
         env.render()

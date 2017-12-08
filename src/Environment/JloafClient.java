@@ -63,8 +63,8 @@ public class JloafClient
 	
 	/* LogFile2CaseBase vars */
 	//protected static String log_file = "lander1.log";			
-	protected static String log_file = "landerALL5000";
-	protected static String cb_file = "landerALL5000.cb";	
+	protected static String log_file = "lunar10000";
+	protected static String cb_file = "lunar10000.cb";	
 	//protected static int features = 0;
 	
 	ComplexSimilarityMetricStrategy complexStrat;
